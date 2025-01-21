@@ -1,0 +1,18 @@
+#creating a git repository, starting from cloning into linux
+git clone <https://reponame>
+#create new files py,java,txt
+cd reponame
+touch demo.txt
+#edit the file
+gedit demo.txt
+#know the status - in git or not
+git status
+#add to repository
+git add demo.txt
+#still not commited, check status again and commit with comment -m
+git commit -m "demorun_upload"
+#create personal classic token and use the command
+git remote set-url origin https://******@github.com/'username'/'repository_name'
+#now push 
+git push origin main
+#check your github profile
