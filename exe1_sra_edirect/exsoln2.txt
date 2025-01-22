@@ -1,0 +1,12 @@
+#ex2 - download runinfo SRP000002
+efetch -db sra -id SRP000002 -format runinfo > SRP000002.runinfo.csv
+
+#create a txt having all acc. no. from SRP000002 runinfo
+cut -d, -f1 SRP000002.runinfo.csv | tail -n +2 > SRP000002.runids.txt
+
+#download all acc.  no. from SRP000002.runids.txt - by prefetch not efetch (can't download seq data -sra)
+prefetch --option-file SRP000002.runids.txt
+
+#extracting 100 reads from the sra files to fastq files - single end(**can do without sra files downloaded)
+fastq-dump --maxSpotId 100 SRR000066
+fastq-dump --maxSpotId 100 SRR000067
