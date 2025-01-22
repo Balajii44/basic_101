@@ -1,0 +1,99 @@
+#Seqkit - works on fasta and fastq
+#installation
+conda install seqkit
+
+### BASIC OPERATIONS
+
+##Transformation of seq ---> seqkit seq
+
+#filter byname
+seqkit seq --name ex_genes.fasta
+
+#filter byseq
+seqkit seq --seq ex_genes.fasta
+
+#filter bylen
+seqkit seq --max-len 250 ex_genes.fasta
+
+##Statistics ---> seqkit stats
+
+#simple statistics, simple statistics in table, advanced statistics
+seqkit stats ex_genes.fasta
+seqkit stats --tabular ex_genes.fasta
+seqkit stats --all ex_genes.fasta
+
+##Extract---> seqkit subseq
+
+#extract first 10 base and last 10 base
+seqkit subseq --region 1:10 ex_genes.fasta
+seqkit subseq --region -10:-1 ex_genes.fasta
+
+##Convert b/w formats
+
+#fastq to fasta-->seqkit fq2fa
+seqkit fq2fa ex_reads.fastq
+
+#fastq/a to tsv(tab sep val)
+seqkit fx2tab ex_reads.fastq
+seqkit fx2tab ex_genes.fasta
+
+#fastq info in tabular format
+seqkit fx2tab --name --length --gc ex_reads.fastq
+seqkit fx2tab --name --length --gc ex_genes.fastq
+
+##Search for subseq---> seqkit grep
+
+#extract by name
+seqkit grep --by-name --pattern "gene-GU280_GP04" ex_genes.fasta
+
+#extract by subseq 
+seqkit grep --by-seq --pattern "AGGCG" ex_genes.fasta
+
+#extract subseq from a region
+seqkit grep --by-seq --pattern "AGGCG" --region 1:10 ex_genes.fasta
+
+##locate subseq--->seqkit locate
+
+#locate subseq in each seq
+seqkit locate --pattern "ACGT" ex_genes.fasta
+
+#locate subseq with 1 mismatch of ACGT
+seqkit locate --pattern "ACGT" --max-mismatch 1 ex_genes.fasta
+
+#locate subseq with regexp
+seqkit locate --pattern "(A{2}|G{2})GC" --use-regexp ex_genes.fasta
+
+##Operations performing--->seqkit sample, sequences by no. or proportions
+
+#sample by no -to reproduce same result --rand-seed 1701
+seqkit sample --number 5 --rand-seed 1701 ex_genes.fasta
+
+#sample by proportion 
+seqkit sample --proportion 0.25 --rand-seed 1701 ex_genes.fasta
+
+##Split seq--->seqkit split
+
+#split by name
+seqkit split --by-id ex_genes.fasta
+
+#split 2 seq one file
+seqkit split --by-size 2 ex_genes.fasta 
+
+##Edit seq--->seqkit replace
+
+#by pattern
+seqkit replace --pattern "-" --replacement "_" ex_genes.fasta
+
+#for seq
+seqkit replace --by-seq --pattern "AGC" --replacement "___" ex_genes.fasta
+
+##Sorting--->seqkit sort
+
+#sort by name
+seqkit sort --by-name ex_genes.fasta
+
+#by length
+seqkit sort --by-length ex_genes.fasta
+
+#shuffle seq
+seqkit shuffle ex_genes.fasta
