@@ -1,0 +1,20 @@
+#sra-toolkit & edirect - seq read archive(sra) only uses NCBI
+#4 levels of SRA - SRP(project), SRS(sample), SRX(exp), SRR(run)
+#entrez - search and retreival from NCBI and Pubmed
+
+#install sra and edirect
+conda install sra-tools entrez-direct
+
+#sra-toolkit -fetch single, multi, acc no as txt files
+prefetch SRR4413906
+prefetch --output-directory <loc> SRR4413906
+prefetch SRR4413817 SRR4413816 SRR4413888
+prefetch --outpu-directory <loc> --option-file acc.txt SRR4413817 SRR4413816 SRR4413888
+
+#fastq-dump extracts fastq file from sra (also without sra); for paired end
+fastq-dump --maxSpotId 100 --outdir <loc> --split-files SRR4413906
+fastq-dump -X 100 --split-files SRR4413906
+fastq-dump --minSpotId 10 --maxSpotId 100 --split-files SRR4413906
+
+#fastq-dump for single end - same above max,min,loc can be implemented
+fastq-dump -X 1000 SRR4413906
