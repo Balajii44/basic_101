@@ -1,0 +1,14 @@
+#ex1 - download SRA with acc. no. SRP094580
+efetch -db sra -id SRP094580 -format runinfo > SRP094580.runinfo.csv
+
+#total no. of runs in SRP094580(119)
+grep "SRR" SRP094580.runinfo.csv | wc -l
+
+#organism that was performed on - column 29 (Mus musculus)
+cut -d, -f29 SRP094580.runinfo.csv | tail -n +2 | head
+
+#which read has largest no. of bases (SRR5077666)
+cut -d, -f5 SRP094580.runinfo.csv | tail -n +2 | sort -nr | head -n 1 
+#sort -nr reverse numerical sorting, tail -n +2 removes the heading, head -n 1 seperates the first value
+grep "40200770900" SRP094580.runinfo.csv | cut -d, -f1
+
