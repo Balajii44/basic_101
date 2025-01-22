@@ -1,0 +1,10 @@
+#cont...sratoolkit
+
+#using efetch for getting runinfo and saving as csv ; note SRP to get runinfo has many SRR
+efetch -db sra -id SRP091443 -format runinfo > runinfo.csv
+
+#efetch for SRR in fasta format
+efetch -db sra -id MN908947 -format fasta > MN908947.fasta
+
+#use of esearch and efetch from DDBJ
+esearch -db sra -query PRJNA541016 | efetch -format runinfo > exercises/hiv/runinfo.csv
