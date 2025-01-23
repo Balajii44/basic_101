@@ -1,0 +1,1 @@
+CBZ11909 cdna chromosome:ASM272v2:2:93562:97107:-1 gene:LMJF_02_0190 gene_biotype:protein_coding transcript_biotype:protein_coding gene_symbol:SCGR4 description:phosphoglycan beta 1,3 galactosyltransferase

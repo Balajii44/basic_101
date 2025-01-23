@@ -1,0 +1,1 @@
+CAG25094 cdna chromosome:ASM276v2:6:1122801:1153664:-1 gene:PF3D7_0628100 gene_biotype:protein_coding transcript_biotype:protein_coding description:HECT-domain (ubiquitin-transferase), putative

@@ -1,0 +1,15 @@
+#max len of genome (29903)
+seqkit stats GCA_009858895.3.fasta
+
+#GC content(37.97)
+seqkit stats --all GCA_009858895.3.fasta
+
+#count "GAGAGA" subseq
+seqkit locate --pattern "GAGAGA" GCA_009858895.3.fasta | tail -n +2 | wc -l > total.txt
+
+#translate dna seq
+seqkit translate GCA_009858895.3.fasta > translated_GCA_009858895.3_prtn.txt
+
+#stop characters "*" in prtn seq
+grep "*" translated_GCA_009858895.3_prtn.txt | wc -l
+

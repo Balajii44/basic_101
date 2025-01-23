@@ -1,0 +1,13 @@
+#total no. of polar aa (2706)
+seqkit translate Leishmania_major.ASM272v2.cdna.all.fa | grep -c "[SCNBQZTY]"
+
+#duplicate seq and names
+seqkit rmdup --by-seq --ignore-case --dup-num-file duplnum.txt --out-file duplfile.txt Leishmania_major.ASM272v2.cdna.all.fa
+
+#28th longest gene (CBZ11909)
+seqkit sort --by-length --reverse Leishmania_major.ASM272v2.cdna.all.fa | seqkit range --range 28:28 | seqkit seq --name > 28_long_gene.txt
+
+#SaCas9 PAM sites (NGRRT or NGRRN) on chromosome 11 (38139)
+seqkit grep --pattern "1" Leishmania_major.ASM272v2.dna.toplevel.fa | seqkit locate --pattern "NGRRT|NGRRN" --degenerate  | tail -n +2 | wc -l > cas9_sites.txt
+
+#

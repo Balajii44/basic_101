@@ -1,0 +1,15 @@
+#no. of genes in genome(5515)
+seqkit stats Plsmoadium_falciparum.ASM276v2.cdna.all.fa
+
+#longest gene (PF3D7_0628100)
+seqkit sort --by-length --reverse Plasmodium_falciparum.ASM276v2.cdna.all.fa | seqkit head -n 1 | seqkit seq --name > longestgene_malaria.txt
+
+#GC content across all genes
+seqkit watch --fields GC --img gc_graph.img Plsmoadium_falciparum.ASM276v2.cdna.all.fa
+
+#extract name and seq of antimalarial drug chloroquine
+seqkit grep --pattern "CAD50842" Plasmodium_falciparum.ASM276v2.cdna.all.fa  > antimalarial.txt
+
+#sliding 1 to window 20
+seqkit grep --p
+attern "CAD50842" Plasmodium_falciparum.ASM276v2.cdna.all.fa | seqkit sliding --step 1 --window 10 | seqkit watch --fields GC --img antimalari_sliding.img Plasmodium_falciparum.ASM276v2.cdna.all.fa
