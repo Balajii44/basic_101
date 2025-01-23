@@ -1,0 +1,32 @@
+#tools installation
+conda install bowtie2 bwa entrez-direct samtools seqkit sra-tools=2.11.0
+
+#bowtie2 - 50-100s or 50-1000s char ; uses FM index - keep memory small
+#bwa - 3 algos bwa-backtrack, bwa-sw and bwa-mem ; first 100bp, 70bp to few mb
+
+#download the ref genome
+efetch -db nuccore -id MN908947 -format fasta > MN908947.fasta
+
+#download paired reads
+fastq-dump -X 1000 -O tutorial/data --split-files SRR15168839
+
+#indexing by bowtie2
+bowtie2-build MN908947.fasta MN908947
+
+#alligning by bowtie2
+bowtie2 -x MN908947 -1 SRR15168839_1.fastq -2 SRR15168839_2.fastq > SRR15168839.sam
+
+#indexing by bwa
+bwa index -p MN908947 MN908947.fasta
+
+#allign with bwa
+bwa mem MN908947 SRR15168839_1.fastq SRR15168839_2.fastq > SRR15168839.sam
+
+##samtools - basics
+
+#header
+samtools view -H SRR15168839.sam
+
+#stats
+samtools flagstat SRR15168839.sam
+
